@@ -24,7 +24,7 @@ function ServiceLight({service,index,active,reduced,onChoose}:{service:Service;i
  <shaderMaterial transparent depthWrite={false} blending={AdditiveBlending} toneMapped={false}
  vertexShader={`varying vec2 lightUv; void main(){lightUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`}
  fragmentShader={`varying vec2 lightUv;void main(){vec2 p=lightUv-.5;float r=length(p);float halo=exp(-r*12.0)*.42;float core=exp(-r*r*1800.0);float rays=(exp(-abs(p.x)*200.0)*exp(-abs(p.y)*16.0)+exp(-abs(p.y)*200.0)*exp(-abs(p.x)*16.0))*.4;gl_FragColor=vec4(vec3(1.0),min(1.0,halo+core+rays));}`}/>
- </mesh> {active===0&&<Html center position={[0,-.45,.1]} zIndexRange={[5,0]}><button className="planet-label" onClick={()=>onChoose(index+1)}>{service.name}<ArrowUpRight size={11}/></button></Html>}
+ </mesh> {active===0&&<Html center position={[0,-.45,.1]} zIndexRange={[5,0]}><button className={`planet-label planet-label--${service.id}`} onClick={()=>onChoose(index+1)}><span className="planet-label__copy"><strong>{service.name}</strong><small>{service.english}</small></span><ArrowUpRight size={12}/></button></Html>}
  </group>;
 }
 function Camera({active,reduced}:{active:number;reduced:boolean}){const target=useRef(new Vector3());useFrame(({camera,pointer,size},delta)=>{target.current.set(reduced?0:pointer.x*.85,reduced?0:pointer.y*.4,(active?13.5:16)*Math.max(1,.85/(size.width/size.height)));camera.position.lerp(target.current,reduced?1:Math.min(delta*2.5,1));camera.lookAt(0,0,0)});return null}
