@@ -1,10 +1,11 @@
 'use client';
-import { useMemo } from 'react';
-import { useThree } from '@react-three/fiber';
-import { AdditiveBlending } from 'three';
+import { useMemo, useRef } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
+import { AdditiveBlending, type Points } from 'three';
 
 export function Galaxy(){
  const {size}=useThree();
+ const galaxy=useRef<Points>(null);
  // Fill both landscape and portrait viewports while preserving a three-dimensional spiral.
  const aspect=size.width/size.height;
  const {positions,sizes,brightness}=useMemo(()=>{
@@ -22,7 +23,8 @@ export function Galaxy(){
  }
  return {positions,sizes,brightness};
  },[]);
- return <points rotation={[0,0,aspect<1?.8:-.3]} scale={aspect<1?1.55:Math.max(1.3,aspect/1.5)} frustumCulled={false}>
+ useFrame(({pointer,clock},delta)=>{if(!galaxy.current)return;const portrait=aspect<1;const t=Math.min(delta*1.7,1);const rotationX=(portrait?.48:.62)+pointer.y*.15;const rotationY=(portrait?.18:-.3)+pointer.x*.22;const rotationZ=(portrait?.76:-.58)+Math.sin(clock.elapsedTime*.18)*.12+pointer.x*.1;galaxy.current.rotation.x+=(rotationX-galaxy.current.rotation.x)*t;galaxy.current.rotation.y+=(rotationY-galaxy.current.rotation.y)*t;galaxy.current.rotation.z+=(rotationZ-galaxy.current.rotation.z)*t;galaxy.current.position.x+=(pointer.x*.75-galaxy.current.position.x)*t;galaxy.current.position.y+=(-pointer.y*.45+Math.sin(clock.elapsedTime*.22)*.12-galaxy.current.position.y)*t});
+ return <points ref={galaxy} rotation={[aspect<1?.48:.62,aspect<1?.18:-.3,aspect<1?.76:-.58]} scale={aspect<1?1.55:Math.max(1.3,aspect/1.5)} frustumCulled={false}>
  <bufferGeometry><bufferAttribute attach="attributes-position" args={[positions,3]}/><bufferAttribute attach="attributes-pointSize" args={[sizes,1]}/><bufferAttribute attach="attributes-brightness" args={[brightness,1]}/></bufferGeometry>
  <shaderMaterial transparent depthWrite={false} blending={AdditiveBlending} toneMapped={false}
  vertexShader={`attribute float pointSize;attribute float brightness;varying float alpha;void main(){vec4 viewPosition=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*viewPosition;gl_PointSize=clamp(pointSize*32.0/-viewPosition.z,1.0,10.0);alpha=brightness;}`}
