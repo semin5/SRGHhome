@@ -21,3 +21,10 @@
 @media(max-width:600px){.header{height:78px;padding:0 6%}.brand{gap:12px}.brand strong,.brand .brand-period{font-size:25px}.brand>span{font-size:7px;padding-left:12px;letter-spacing:1.2px}.header-actions button{font-size:9px;padding:0 12px;height:32px}.hero-copy{top:20%;left:8%;right:8%;max-width:none}.hero-copy .eyebrow{font-size:7px;margin-bottom:22px;letter-spacing:2px}.hero-copy h1{font-size:61px;letter-spacing:-3px;line-height:1.05}.hero-copy h1 span{letter-spacing:-3px}.hero-description{font-size:10px;line-height:1.8;margin-top:19px}.planet-label{font-size:8px;padding:6px 8px;gap:5px}.planet-label svg{width:9px}.detail-copy{top:18%;transform:none;max-width:85%;left:8%}.detail-copy .eyebrow{font-size:7px;margin-bottom:18px}.detail-copy h2{font-size:39px;letter-spacing:-2px;margin-bottom:17px}.section-headline{font-size:17px;line-height:1.5}.description{font-size:10px;margin-top:12px;margin-bottom:21px}.launch-button{font-size:10px;padding-bottom:10px;gap:25px}.fixed-nav{bottom:17px;border-radius:13px;padding:5px;max-width:92%}.fixed-nav a{font-size:9px;padding:12px 14px;gap:6px}.fixed-nav a small{font-size:7px}.bottom-bar{bottom:87px}.planet-caption{bottom:23%;font-size:8px}.service-dialog,.all-services{padding:24px!important}.service-grid button{padding:18px 15px}}
 @media(max-height:680px) and (min-width:601px){.hero-copy{top:22%}.hero-copy h1{font-size:78px}.hero-description{margin-top:20px}.detail-copy{top:48%}.detail-copy h2{font-size:48px;margin-bottom:20px}.section-headline{font-size:18px}.topic-tags{margin-top:24px}}
 @media(prefers-reduced-motion:reduce){.detail-copy{filter:none;transition:none}.launch-button svg{transition:none}}
+
+/* Keep service labels readable against the brighter galaxy. */
+.planet-label{background:#000b;border-color:#ffffff30;color:#eee;text-shadow:0 1px 5px #000;padding:9px 14px}
+.header{background:linear-gradient(#000b,transparent)}
+.detail-copy{background:radial-gradient(ellipse at left,#000c,transparent 75%);text-shadow:0 2px 12px #000}
+.bottom-bar{filter:drop-shadow(0 2px 6px #000)}
+@media(max-width:600px){.planet-label{font-size:9px;padding:8px 10px}}
