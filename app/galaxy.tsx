@@ -17,7 +17,7 @@ export function Galaxy(){
  const angle=(i%3)*Math.PI*2/3+r*.64+(random()-.5)*(core?6.28:.48+r*.045);
  positions[i*3]=background?(random()-.5)*48:Math.cos(angle)*r;
  positions[i*3+1]=background?(random()-.5)*30:Math.sin(angle)*r*.68+(random()-.5)*.6;
- positions[i*3+2]=background?-5-random()*20:-5+Math.sin(angle)*r*.28+(random()-.5)*1.5;
+ positions[i*3+2]=background?-5-random()*20:Math.sin(angle)*r*.28+(random()-.5)*1.5;
  sizes[i]=background?1+random()*2:core?2+random()*5:1.4+random()*3.8;
  brightness[i]=background?.3+random()*.65:core?.55+random()*.45:.22+random()*.65;
  }
