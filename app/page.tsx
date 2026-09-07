@@ -2,12 +2,13 @@
 import { useState, useEffect, useRef, Component, type ReactNode } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
-import { AdditiveBlending, Vector3, type Group } from 'three';
+import { AdditiveBlending, Color, Vector3, type Group } from 'three';
 import { ArrowUpRight, ArrowDown, ArrowLeft, Grid2X2, Server, MessageCircle, BookOpen, Activity, FileText, LifeBuoy } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { services, type Service } from './services';
 import { Galaxy } from './galaxy';
 const icons=[Server,MessageCircle,BookOpen,Activity,FileText,LifeBuoy];
+const lightColors=['#ff4d5f','#29a9ff','#ffd43b','#a86bff','#2de2a6','#ff8a3d'];
 const headlines=['안정적인 업무의\n시작점.','대화가 흐르면,\n업무도 이어집니다.','오늘의 기록이\n내일의 방향으로.','보이지 않는 흐름을\n한눈에.','함께 쌓은 지식,\n필요한 순간에.','막히는 순간,\n함께 해결합니다.'];
 const tags=[['서버','인프라','운영 관리'],['팀 대화','협업','소식 공유'],['업무 기록','진행 상황','일일 정리'],['시스템 상태','주요 지표','운영 모니터링'],['업무 가이드','기술 문서','팀 지식'],['장애 문의','업무 지원','문제 해결']];
 class SceneBoundary extends Component<{children:ReactNode},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return {failed:true}}render(){return this.state.failed?<span className="scene-fallback">서비스는 하단 메뉴에서 선택할 수 있습니다.</span>:this.props.children}}
@@ -21,9 +22,9 @@ function ServiceLight({service,index,active,reduced,onChoose}:{service:Service;i
  return <group ref={group} position={[service.position[0],service.position[1]-1.8,service.position[2]]}>
  <mesh onPointerOver={()=>setHover(true)} onPointerOut={()=>setHover(false)} onClick={e=>{e.stopPropagation();onChoose(index+1)}}>
  <planeGeometry args={[1.7,1.7]}/>
- <shaderMaterial transparent depthWrite={false} blending={AdditiveBlending} toneMapped={false}
+ <shaderMaterial transparent depthWrite={false} blending={AdditiveBlending} toneMapped={false} uniforms={{lightColor:{value:new Color(lightColors[index])}}}
  vertexShader={`varying vec2 lightUv; void main(){lightUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`}
- fragmentShader={`varying vec2 lightUv;void main(){vec2 p=lightUv-.5;float r=length(p);float halo=exp(-r*12.0)*.42;float core=exp(-r*r*1800.0);float rays=(exp(-abs(p.x)*200.0)*exp(-abs(p.y)*16.0)+exp(-abs(p.y)*200.0)*exp(-abs(p.x)*16.0))*.4;gl_FragColor=vec4(vec3(1.0),min(1.0,halo+core+rays));}`}/>
+ fragmentShader={`uniform vec3 lightColor;varying vec2 lightUv;void main(){vec2 p=lightUv-.5;float r=length(p);float halo=exp(-r*10.0)*.55;float core=exp(-r*r*1700.0);float rays=(exp(-abs(p.x)*190.0)*exp(-abs(p.y)*15.0)+exp(-abs(p.y)*190.0)*exp(-abs(p.x)*15.0))*.48;float alpha=min(1.0,halo+core+rays);vec3 color=mix(lightColor,vec3(1.0),core*.72);gl_FragColor=vec4(color,alpha);}`}/>
  </mesh> {active===0&&<Html center position={[0,-.45,.1]} zIndexRange={[5,0]}><button className={`planet-label planet-label--${service.id}`} onClick={()=>onChoose(index+1)}><span className="planet-label__copy"><strong>{service.name}</strong><small>{service.english}</small></span><ArrowUpRight size={12}/></button></Html>}
  </group>;
 }

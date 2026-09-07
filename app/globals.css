@@ -28,3 +28,7 @@
 .detail-copy{background:radial-gradient(ellipse at left,#000c,transparent 75%);text-shadow:0 2px 12px #000}
 .bottom-bar{filter:drop-shadow(0 2px 6px #000)}
 @media(max-width:600px){.planet-label{min-width:92px;padding:8px 9px 8px 12px}.planet-label__copy strong{font-size:12px}.planet-label__copy small{font-size:8px}.planet-label--docs,.planet-label--messenger{min-width:100px}}
+
+/* Brighter service beacons, larger labels, and a left-anchored service dock. */
+.planet-label{min-width:122px;padding:12px 14px 12px 17px}.planet-label__copy{gap:5px}.planet-label__copy strong{font-size:16px;letter-spacing:-.025em}.planet-label__copy small{font-size:10px}.planet-label--docs,.planet-label--messenger{min-width:132px}.fixed-nav{left:6%;transform:none}.fixed-nav a{font-size:12px}.fixed-nav a small{font-size:9px}
+@media(max-width:600px){.planet-label{min-width:106px;padding:10px 11px 10px 14px}.planet-label__copy strong{font-size:14px}.planet-label__copy small{font-size:9px}.planet-label--docs,.planet-label--messenger{min-width:114px}.fixed-nav{left:4%;transform:none}.fixed-nav a{font-size:10px}}
