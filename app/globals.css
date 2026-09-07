@@ -32,3 +32,7 @@
 /* Brighter service beacons, larger labels, and a left-anchored service dock. */
 .planet-label{min-width:122px;padding:12px 14px 12px 17px}.planet-label__copy{gap:5px}.planet-label__copy strong{font-size:16px;letter-spacing:-.025em}.planet-label__copy small{font-size:10px}.planet-label--docs,.planet-label--messenger{min-width:132px}.fixed-nav{left:6%;transform:none}.fixed-nav a{font-size:12px}.fixed-nav a small{font-size:9px}
 @media(max-width:600px){.planet-label{min-width:106px;padding:10px 11px 10px 14px}.planet-label__copy strong{font-size:14px}.planet-label__copy small{font-size:9px}.planet-label--docs,.planet-label--messenger{min-width:114px}.fixed-nav{left:4%;transform:none}.fixed-nav a{font-size:10px}}
+
+/* Main beacons use one clean Korean label without a frame. */
+.planet-label,.planet-label--docs,.planet-label--messenger{min-width:auto;border:0;background:#050505a6;padding:9px 11px 9px 13px;gap:10px;box-shadow:0 8px 24px #0008}.planet-label>strong{font-size:16px;font-weight:500;line-height:1;letter-spacing:-.025em}.planet-label:hover{border:0;background:#181818c9}.planet-label:hover>svg{color:#fff}
+@media(max-width:600px){.planet-label,.planet-label--docs,.planet-label--messenger{min-width:auto;padding:8px 9px 8px 11px}.planet-label>strong{font-size:14px}}
