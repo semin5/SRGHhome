@@ -8,7 +8,7 @@ import {Galaxy} from './galaxy';
 import {workItems} from './services';
 const colors=['#39c8ff','#ffd84a','#ff5a70'];
 const roadmap=[{name:'메인',english:'HOME',target:0},{name:'소개',english:'ABOUT',target:1},{name:'연혁',english:'HISTORY',target:3}];
-const galaxyLinks=[{name:'소개',position:[-3.7,.9,0] as [number,number,number],target:1},{name:'개발 · 배포',position:[.2,-1.05,-.4] as [number,number,number],target:2},{name:'연혁',position:[3.8,1.15,-.5] as [number,number,number],target:3}];
+const galaxyLinks=[{name:'소개',position:[-3.7,.9,0] as [number,number,number],target:1},{name:'개발 · 배포',position:[2.55,-1.3,-.4] as [number,number,number],target:2},{name:'연혁',position:[3.8,1.15,-.5] as [number,number,number],target:3}];
 class SceneBoundary extends Component<{children:ReactNode},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return{failed:true}}render(){return this.state.failed?null:this.props.children}}
 function SectionLight({item,index,active,reduced,onChoose}:{item:(typeof galaxyLinks)[number];index:number;active:number;reduced:boolean;onChoose:(i:number)=>void}){
  const group=useRef<Group>(null),target=useRef(new Vector3()),scale=useRef(new Vector3());
