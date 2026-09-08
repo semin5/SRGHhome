@@ -10,17 +10,17 @@ export function Galaxy(){
  const aspect=size.width/size.height;
  const {positions,sizes,brightness,colors}=useMemo(()=>{
  let seed=7182;const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
- const count=32800,positions=new Float32Array(count*3),sizes=new Float32Array(count),brightness=new Float32Array(count),colors=new Float32Array(count*3);
+ const count=41300,positions=new Float32Array(count*3),sizes=new Float32Array(count),brightness=new Float32Array(count),colors=new Float32Array(count*3);
  for(let i=0;i<count;i++){
- const background=i<3500;const bulge=i>=3500&&i<8900;const bar=i>=8900&&i<12600;
+ const background=i<12000;const bulge=i>=12000&&i<17400;const bar=i>=17400&&i<21100;
  let px=0,py=0,pz=0,r=0;
- if(background){px=(random()-.5)*48;py=(random()-.5)*30;pz=-5-random()*20}
+ if(background){px=(random()-.5)*52;py=(random()-.5)*34;pz=-2-random()*14}
  else if(bulge){r=Math.pow(random(),2.25)*4.2;const a=random()*Math.PI*2;px=Math.cos(a)*r*1.22;py=Math.sin(a)*r*.72;pz=(random()-.5)*2.7*Math.max(.25,1-r/5)}
  else if(bar){const u=(random()-.5)*9.2,v=(random()-.5)*(1.15-Math.abs(u)*.075),a=.24;px=u*Math.cos(a)-v*Math.sin(a);py=u*Math.sin(a)+v*Math.cos(a);pz=(random()-.5)*.85}
  else{r=.7+Math.pow(random(),.68)*13.8;const arm=(i%4)*Math.PI/2;const a=arm+r*.48+(random()-.5)*(.34+r*.018);px=Math.cos(a)*r;py=Math.sin(a)*r*.66+(random()-.5)*.38;pz=(random()-.5)*1.05*Math.max(.3,1-r/18)}
  positions[i*3]=px;positions[i*3+1]=py;positions[i*3+2]=pz;
- sizes[i]=background?1+random()*2.2:bulge?2.6+random()*6.4:bar?2.1+random()*5.2:1.5+random()*4.6;
- brightness[i]=background?.25+random()*.62:bulge?.7+random()*.58:bar?.52+random()*.58:.3+random()*.82;
+ sizes[i]=background?1.7+random()*3.8:bulge?2.6+random()*6.4:bar?2.1+random()*5.2:1.5+random()*4.6;
+ brightness[i]=background?.48+random()*.72:bulge?.7+random()*.58:bar?.52+random()*.58:.3+random()*.82;
  const hue=random();let red=.62,green=.78,blue=1;
  if(background){if(hue<.72){red=.58+random()*.25;green=.72+random()*.22;blue=1}else if(hue<.93){red=.9+random()*.1;green=.9+random()*.1;blue=1}else{red=1;green=.48+random()*.25;blue=.35+random()*.3}}
  else if(bulge){red=1;green=.78+random()*.22;blue=.52+random()*.34}
