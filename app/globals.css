@@ -14,3 +14,4 @@
 .universe{background:radial-gradient(circle at 72% 24%,#42265c55 0,transparent 28%),radial-gradient(circle at 24% 72%,#1649684d 0,transparent 32%),linear-gradient(145deg,#050918,#111635 48%,#030611)}
 .universe::before{content:'';position:absolute;z-index:0;inset:-30%;background:linear-gradient(138deg,transparent 30%,#183f6652 40%,#72487642 47%,#d6d9ff26 50%,#31578a42 54%,transparent 66%);filter:blur(55px);opacity:.82;transform:rotate(-4deg)}
 .universe canvas{position:relative;z-index:1}
+.section-light-static{cursor:default}
