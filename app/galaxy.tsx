@@ -19,15 +19,17 @@ export function Galaxy(){
  else if(bar){const u=(random()-.5)*9.2,v=(random()-.5)*(1.15-Math.abs(u)*.075),a=.24;px=u*Math.cos(a)-v*Math.sin(a);py=u*Math.sin(a)+v*Math.cos(a);pz=(random()-.5)*.85}
  else{r=.7+Math.pow(random(),.68)*13.8;const arm=(i%4)*Math.PI/2;const a=arm+r*.48+(random()-.5)*(.34+r*.018);px=Math.cos(a)*r;py=Math.sin(a)*r*.66+(random()-.5)*.38;pz=(random()-.5)*1.05*Math.max(.3,1-r/18)}
  positions[i*3]=px;positions[i*3+1]=py;positions[i*3+2]=pz;
- sizes[i]=background?1+random()*2.2:bulge?2.6+random()*6.4:bar?2.1+random()*5.2:1.4+random()*4.3;
- brightness[i]=background?.28+random()*.65:bulge?.68+random()*.58:bar?.5+random()*.58:.28+random()*.78;
- const hue=random();let red=.48,green=.72,blue=1;
- if(background){red=hue>.9?1:.58;green=hue>.9?.42:.78;blue=hue>.9?.68:1}
- else if(bulge){red=1;green=.7+random()*.3;blue=.42+random()*.42}
- else if(bar){red=1;green=.58+random()*.35;blue=.35+random()*.42}
- else if(hue<.58){red=.35+random()*.28;green=.65+random()*.32;blue=1}
- else if(hue<.82){red=.72+random()*.25;green=.76+random()*.22;blue=1}
- else{red=1;green=.22+random()*.35;blue=.58+random()*.34}
+ sizes[i]=background?1+random()*2.2:bulge?2.6+random()*6.4:bar?2.1+random()*5.2:1.5+random()*4.6;
+ brightness[i]=background?.25+random()*.62:bulge?.7+random()*.58:bar?.52+random()*.58:.3+random()*.82;
+ const hue=random();let red=.62,green=.78,blue=1;
+ if(background){if(hue<.72){red=.58+random()*.25;green=.72+random()*.22;blue=1}else if(hue<.93){red=.9+random()*.1;green=.9+random()*.1;blue=1}else{red=1;green=.48+random()*.25;blue=.35+random()*.3}}
+ else if(bulge){red=1;green=.78+random()*.22;blue=.52+random()*.34}
+ else if(bar){red=1;green=.68+random()*.28;blue=.42+random()*.38}
+ else if(hue<.46){red=.28+random()*.28;green=.68+random()*.27;blue=1}
+ else if(hue<.7){red=.68+random()*.25;green=.78+random()*.2;blue=1}
+ else if(hue<.86){red=.55+random()*.24;green=.36+random()*.28;blue=1}
+ else if(hue<.96){red=1;green=.24+random()*.3;blue=.58+random()*.3}
+ else{red=.25+random()*.2;green=.86+random()*.14;blue=1}
  colors[i*3]=red;colors[i*3+1]=green;colors[i*3+2]=blue;
  }
  return {positions,sizes,brightness,colors};
@@ -37,6 +39,6 @@ export function Galaxy(){
  <bufferGeometry><bufferAttribute attach="attributes-position" args={[positions,3]}/><bufferAttribute attach="attributes-pointSize" args={[sizes,1]}/><bufferAttribute attach="attributes-brightness" args={[brightness,1]}/><bufferAttribute attach="attributes-starColor" args={[colors,3]}/></bufferGeometry>
  <shaderMaterial transparent depthWrite={false} blending={AdditiveBlending} toneMapped={false}
  vertexShader={`attribute float pointSize;attribute float brightness;attribute vec3 starColor;varying float alpha;varying vec3 color;void main(){vec4 viewPosition=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*viewPosition;gl_PointSize=clamp(pointSize*34.0/-viewPosition.z,1.0,12.0);alpha=brightness;color=starColor;}`}
- fragmentShader={`varying float alpha;varying vec3 color;void main(){float r=length(gl_PointCoord-vec2(.5));float halo=exp(-r*r*13.0);float core=exp(-r*r*85.0);float edge=1.0-smoothstep(.38,.5,r);gl_FragColor=vec4(mix(color,vec3(1.0),core*.72),(halo*.7+core)*edge*alpha);}`}/>
+ fragmentShader={`varying float alpha;varying vec3 color;void main(){float r=length(gl_PointCoord-vec2(.5));float halo=exp(-r*r*11.0);float core=exp(-r*r*105.0);float edge=1.0-smoothstep(.39,.5,r);vec3 glow=mix(color,vec3(1.0),core*.82);gl_FragColor=vec4(glow,(halo*.76+core*1.15)*edge*alpha);}`}/>
  </points>;
 }
