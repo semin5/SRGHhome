@@ -10,26 +10,24 @@ export function Galaxy(){
  const aspect=size.width/size.height;
  const {positions,sizes,brightness,colors}=useMemo(()=>{
  let seed=7182;const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
- const count=26000,positions=new Float32Array(count*3),sizes=new Float32Array(count),brightness=new Float32Array(count),colors=new Float32Array(count*3);
+ const count=30000,positions=new Float32Array(count*3),sizes=new Float32Array(count),brightness=new Float32Array(count),colors=new Float32Array(count*3);
  for(let i=0;i<count;i++){
- const background=i<700;const bulge=i>=700&&i<7200;const ring=i>=7200&&i<15000;
- const angle=random()*Math.PI*2;
- let r=0;
- if(bulge)r=Math.pow(random(),2.35)*4.8;
- else if(ring)r=5.2+(random()-.5)*1.45+Math.sin(angle*3)*.28;
- else r=1.8+Math.pow(random(),.62)*13.5;
- positions[i*3]=background?(random()-.5)*48:Math.cos(angle)*r*(bulge?1.25:1);
- positions[i*3+1]=background?(random()-.5)*30:Math.sin(angle)*r*(bulge?.72:.48)+(random()-.5)*(bulge?.45:.22);
- positions[i*3+2]=background?-5-random()*20:(random()-.5)*(bulge?2.8:1.05)*Math.max(.2,1-r/18);
- sizes[i]=background?1+random()*2.3:bulge?2.5+random()*6.8:ring?2+random()*5.5:1.3+random()*3.6;
- brightness[i]=background?.3+random()*.65:bulge?.65+random()*.6:ring?.55+random()*.58:.22+random()*.7;
- const hue=random();let red=.36,green=.72,blue=1;
- if(background){red=hue>.88?1:.55;green=hue>.88?.4:.78;blue=hue>.88?.65:1}
- else if(bulge){red=1;green=.62+random()*.36;blue=.32+random()*.5}
- else if(ring){red=hue<.52?.18:1;green=hue<.52?.75+random()*.25:.22+random()*.3;blue=hue<.52?1:.72+random()*.28}
- else if(hue<.48){red=.25;green=.55+random()*.35;blue=1}
- else if(hue<.78){red=.62+random()*.25;green=.34+random()*.25;blue=1}
- else{red=1;green=.25+random()*.3;blue=.55+random()*.3}
+ const background=i<700;const bulge=i>=700&&i<6100;const bar=i>=6100&&i<9800;
+ let px=0,py=0,pz=0,r=0;
+ if(background){px=(random()-.5)*48;py=(random()-.5)*30;pz=-5-random()*20}
+ else if(bulge){r=Math.pow(random(),2.25)*4.2;const a=random()*Math.PI*2;px=Math.cos(a)*r*1.22;py=Math.sin(a)*r*.72;pz=(random()-.5)*2.7*Math.max(.25,1-r/5)}
+ else if(bar){const u=(random()-.5)*9.2,v=(random()-.5)*(1.15-Math.abs(u)*.075),a=.24;px=u*Math.cos(a)-v*Math.sin(a);py=u*Math.sin(a)+v*Math.cos(a);pz=(random()-.5)*.85}
+ else{r=.7+Math.pow(random(),.68)*13.8;const arm=(i%4)*Math.PI/2;const a=arm+r*.48+(random()-.5)*(.34+r*.018);px=Math.cos(a)*r;py=Math.sin(a)*r*.66+(random()-.5)*.38;pz=(random()-.5)*1.05*Math.max(.3,1-r/18)}
+ positions[i*3]=px;positions[i*3+1]=py;positions[i*3+2]=pz;
+ sizes[i]=background?1+random()*2.2:bulge?2.6+random()*6.4:bar?2.1+random()*5.2:1.4+random()*4.3;
+ brightness[i]=background?.28+random()*.65:bulge?.68+random()*.58:bar?.5+random()*.58:.28+random()*.78;
+ const hue=random();let red=.48,green=.72,blue=1;
+ if(background){red=hue>.9?1:.58;green=hue>.9?.42:.78;blue=hue>.9?.68:1}
+ else if(bulge){red=1;green=.7+random()*.3;blue=.42+random()*.42}
+ else if(bar){red=1;green=.58+random()*.35;blue=.35+random()*.42}
+ else if(hue<.58){red=.35+random()*.28;green=.65+random()*.32;blue=1}
+ else if(hue<.82){red=.72+random()*.25;green=.76+random()*.22;blue=1}
+ else{red=1;green=.22+random()*.35;blue=.58+random()*.34}
  colors[i*3]=red;colors[i*3+1]=green;colors[i*3+2]=blue;
  }
  return {positions,sizes,brightness,colors};
