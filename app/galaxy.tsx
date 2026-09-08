@@ -14,7 +14,7 @@ export function Galaxy(){
  for(let i=0;i<count;i++){
  const background=i<12000;const bulge=i>=12000&&i<17400;const bar=i>=17400&&i<21100;
  let px=0,py=0,pz=0,r=0;
- if(background){px=(random()-.5)*52;py=(random()-.5)*34;pz=-2-random()*14}
+ if(background){px=(random()-.5)*62;py=(random()-.5)*58+3;pz=-1-random()*7}
  else if(bulge){r=Math.pow(random(),2.25)*4.2;const a=random()*Math.PI*2;px=Math.cos(a)*r*1.22;py=Math.sin(a)*r*.72;pz=(random()-.5)*2.7*Math.max(.25,1-r/5)}
  else if(bar){const u=(random()-.5)*9.2,v=(random()-.5)*(1.15-Math.abs(u)*.075),a=.24;px=u*Math.cos(a)-v*Math.sin(a);py=u*Math.sin(a)+v*Math.cos(a);pz=(random()-.5)*.85}
  else{r=.7+Math.pow(random(),.68)*13.8;const arm=(i%4)*Math.PI/2;const a=arm+r*.48+(random()-.5)*(.34+r*.018);px=Math.cos(a)*r;py=Math.sin(a)*r*.66+(random()-.5)*.38;pz=(random()-.5)*1.05*Math.max(.3,1-r/18)}
