@@ -10,8 +10,8 @@
 
 .section-light-label{display:flex;align-items:center;gap:10px;border:0;background:#050505b8;color:#eee;padding:9px 12px;border-radius:7px;white-space:nowrap;cursor:pointer;text-shadow:0 2px 8px #000}.section-light-label strong{font-size:18px;font-weight:500;letter-spacing:-.035em}.section-light-label svg{color:#aaa;stroke-width:1.4}.section-light-label:hover{background:#202020d9}.work-scope{position:absolute;left:50%;bottom:14%;transform:translateX(-50%);display:flex;align-items:center;gap:27px;white-space:nowrap}.work-scope>span{display:flex;align-items:center;font-size:17px;font-weight:500;letter-spacing:-.035em;color:#f0f0f0;text-shadow:0 2px 12px #000,0 0 18px #000}.work-scope>span+span::before{content:'·';margin-right:27px;color:#777;font-size:12px}.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:34px}.about-grid article{padding:18px;border-top:1px solid #555;background:#0d0d0dad}.about-grid small{font:9px monospace;color:#777}.about-grid strong{display:block;font-size:16px;margin:17px 0 9px}.about-grid p{font-size:12px;line-height:1.7;color:#888;margin:0}
 @media(max-width:700px){.section-light-label strong{font-size:15px}.work-scope{bottom:14%;max-width:92%;gap:12px}.work-scope>span{font-size:14px}.work-scope>span+span::before{margin-right:12px}.about-grid{grid-template-columns:repeat(2,1fr);margin-top:22px}.about-grid article{padding:13px}.about-grid strong{margin:10px 0 6px}.about-grid p{font-size:11px}}
-.experience{background:radial-gradient(ellipse at 48% 52%,#1a2143 0%,#0d1430 27%,#071024 49%,#030712 73%,#02040d 100%)}
-.universe{background:radial-gradient(circle at 72% 24%,#42265c55 0,transparent 28%),radial-gradient(circle at 24% 72%,#1649684d 0,transparent 32%),linear-gradient(145deg,#050918,#111635 48%,#030611)}
-.universe::before{content:'';position:absolute;z-index:0;inset:-30%;background:linear-gradient(138deg,transparent 30%,#183f6652 40%,#72487642 47%,#d6d9ff26 50%,#31578a42 54%,transparent 66%);filter:blur(55px);opacity:.82;transform:rotate(-4deg)}
+.experience{background:#02040d}
+.universe{background:#02040d}
+.universe::before{display:none}
 .universe canvas{position:relative;z-index:1}
 .section-light-static{cursor:default}
