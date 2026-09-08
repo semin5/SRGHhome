@@ -16,3 +16,4 @@
 .universe canvas{position:relative;z-index:1}
 .section-light-static{cursor:default}
 .experience :is(h1,h2,h3,p,span,small,strong,em,a,button,li){color:#fff!important}
+.history-list article{background:#0d0d0dad}
