@@ -10,9 +10,9 @@ export function Galaxy(){
  const aspect=size.width/size.height;
  const {positions,sizes,brightness,colors}=useMemo(()=>{
  let seed=7182;const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
- const count=55300,positions=new Float32Array(count*3),sizes=new Float32Array(count),brightness=new Float32Array(count),colors=new Float32Array(count*3);
+ const count=69300,positions=new Float32Array(count*3),sizes=new Float32Array(count),brightness=new Float32Array(count),colors=new Float32Array(count*3);
  for(let i=0;i<count;i++){
- const background=i<26000;const bulge=i>=26000&&i<31400;const bar=i>=31400&&i<35100;
+ const background=i<40000;const bulge=i>=40000&&i<45400;const bar=i>=45400&&i<49100;
  let px=0,py=0,pz=0,r=0;
  if(background){const vertical=random()*2-1,azimuth=random()*Math.PI*2,radius=30+random()*32,ring=Math.sqrt(1-vertical*vertical);px=Math.cos(azimuth)*ring*radius;py=vertical*radius;pz=Math.sin(azimuth)*ring*radius}
  else if(bulge){r=Math.pow(random(),2.25)*4.2;const a=random()*Math.PI*2;px=Math.cos(a)*r*1.22;py=Math.sin(a)*r*.72;pz=(random()-.5)*2.7*Math.max(.25,1-r/5)}
