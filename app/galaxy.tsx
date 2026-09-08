@@ -14,7 +14,7 @@ export function Galaxy(){
  for(let i=0;i<count;i++){
  const background=i<26000;const bulge=i>=26000&&i<31400;const bar=i>=31400&&i<35100;
  let px=0,py=0,pz=0,r=0;
- if(background){px=(random()-.5)*82;py=(random()-.5)*78+4;pz=-1-random()*8}
+ if(background){const vertical=random()*2-1,azimuth=random()*Math.PI*2,radius=30+random()*32,ring=Math.sqrt(1-vertical*vertical);px=Math.cos(azimuth)*ring*radius;py=vertical*radius;pz=Math.sin(azimuth)*ring*radius}
  else if(bulge){r=Math.pow(random(),2.25)*4.2;const a=random()*Math.PI*2;px=Math.cos(a)*r*1.22;py=Math.sin(a)*r*.72;pz=(random()-.5)*2.7*Math.max(.25,1-r/5)}
  else if(bar){const u=(random()-.5)*9.2,v=(random()-.5)*(1.15-Math.abs(u)*.075),a=.24;px=u*Math.cos(a)-v*Math.sin(a);py=u*Math.sin(a)+v*Math.cos(a);pz=(random()-.5)*.85}
  else{r=.7+Math.pow(random(),.68)*13.8;const arm=(i%4)*Math.PI/2;const a=arm+r*.48+(random()-.5)*(.34+r*.018);px=Math.cos(a)*r;py=Math.sin(a)*r*.66+(random()-.5)*.38;pz=(random()-.5)*1.05*Math.max(.3,1-r/18)}
@@ -34,7 +34,7 @@ export function Galaxy(){
  }
  return {positions,sizes,brightness,colors};
  },[]);
- useFrame(({pointer,clock},delta)=>{if(!galaxy.current)return;const portrait=aspect<1;const t=Math.min(delta*1.7,1);const rotationX=(portrait?-1.01:-1.17)+pointer.y*.09;const rotationY=(portrait?-.07:-.23)+pointer.x*.13;const rotationZ=(portrait?.48:-.56)+clock.elapsedTime*.045;galaxy.current.rotation.x+=(rotationX-galaxy.current.rotation.x)*t;galaxy.current.rotation.y+=(rotationY-galaxy.current.rotation.y)*t;galaxy.current.rotation.z+=(rotationZ-galaxy.current.rotation.z)*t;galaxy.current.position.x+=(pointer.x*.46-galaxy.current.position.x)*t;galaxy.current.position.y+=(-pointer.y*.25+Math.sin(clock.elapsedTime*.22)*.06-galaxy.current.position.y)*t});
+ useFrame(({pointer,clock},delta)=>{if(!galaxy.current)return;const portrait=aspect<1;const t=Math.min(delta*1.7,1);const rotationX=(portrait?-1.01:-1.17)+pointer.y*.09;const rotationY=(portrait?-.07:-.23)+pointer.x*.13;const rotationZ=(portrait?.48:-.56)+clock.elapsedTime*.018;galaxy.current.rotation.x+=(rotationX-galaxy.current.rotation.x)*t;galaxy.current.rotation.y+=(rotationY-galaxy.current.rotation.y)*t;galaxy.current.rotation.z+=(rotationZ-galaxy.current.rotation.z)*t;galaxy.current.position.x+=(pointer.x*.46-galaxy.current.position.x)*t;galaxy.current.position.y+=(-pointer.y*.25+Math.sin(clock.elapsedTime*.22)*.06-galaxy.current.position.y)*t});
  return <points ref={galaxy} position={[0,0,0]} rotation={[aspect<1?-1.01:-1.17,aspect<1?-.07:-.23,aspect<1?.48:-.56]} scale={aspect<1?1.9:Math.max(1.68,aspect/1.28)} frustumCulled={false}>
  <bufferGeometry><bufferAttribute attach="attributes-position" args={[positions,3]}/><bufferAttribute attach="attributes-pointSize" args={[sizes,1]}/><bufferAttribute attach="attributes-brightness" args={[brightness,1]}/><bufferAttribute attach="attributes-starColor" args={[colors,3]}/></bufferGeometry>
  <shaderMaterial transparent depthWrite={false} blending={AdditiveBlending} toneMapped={false}
